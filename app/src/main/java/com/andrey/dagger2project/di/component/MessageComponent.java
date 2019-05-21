@@ -1,8 +1,8 @@
-package com.andrey.dagger2project.component;
+package com.andrey.dagger2project.di.component;
 
-import com.andrey.dagger2project.MessageApplicationScope;
 import com.andrey.dagger2project.api.MessageApi;
-import com.andrey.dagger2project.module.MessageModule;
+import com.andrey.dagger2project.di.annotation.MessageApplicationScope;
+import com.andrey.dagger2project.di.module.MessageModule;
 
 import dagger.Component;
 

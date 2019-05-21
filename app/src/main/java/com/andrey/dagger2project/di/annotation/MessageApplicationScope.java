@@ -1,4 +1,4 @@
-package com.andrey.dagger2project;
+package com.andrey.dagger2project.di.annotation;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

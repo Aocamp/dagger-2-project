@@ -5,19 +5,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.andrey.dagger2project.adapter.MessageAdapter;
 import com.andrey.dagger2project.api.MessageApi;
-import com.andrey.dagger2project.component.DaggerMessageComponent;
-import com.andrey.dagger2project.component.MessageComponent;
+import com.andrey.dagger2project.di.component.MessageComponent;
 import com.andrey.dagger2project.model.Message;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -40,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new MessageAdapter(MainActivity.this, messageList);
         mRecyclerView.setAdapter(mAdapter);
 
-        MessageComponent component = DaggerMessageComponent.create();
+        App app = (App) getApplication();
+        MessageComponent component = app.getComponent();
         messageApi = component.getMessageApi();
 
         loadAllMessages();
@@ -53,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(@NonNull Call<List<Message>> call, @NonNull Response<List<Message>> response) {
                  List<Message> message = response.body();
                  mAdapter.setItem(message);
+                 mAdapter.notifyDataSetChanged();
             }
 
             @Override

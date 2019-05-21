@@ -1,6 +1,6 @@
-package com.andrey.dagger2project.module;
+package com.andrey.dagger2project.di.module;
 
-import com.andrey.dagger2project.MessageApplicationScope;
+import com.andrey.dagger2project.di.annotation.MessageApplicationScope;
 import com.andrey.dagger2project.api.MessageApi;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

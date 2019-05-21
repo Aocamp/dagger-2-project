@@ -17,16 +17,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder> {
-    class MessageViewHolder extends RecyclerView.ViewHolder{
-        @BindView(R.id.message_user) TextView messageUser;
-        @BindView(R.id.message_text) TextView messageText;
-
-        public MessageViewHolder(View v){
-            super(v);
-            ButterKnife.bind(this, v);
-        }
-    }
-
     private List<Message> messageList;
     private final LayoutInflater mInflater;
 
@@ -50,12 +40,10 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
     public void setItem(List<Message> messages){
         messageList = messages;
-        notifyDataSetChanged();
     }
 
     public void clearItem() {
         messageList.clear();
-        notifyDataSetChanged();
     }
 
     @Override
@@ -64,4 +52,21 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             return messageList.size();
         else return 0;
     }
+
+    class MessageViewHolder extends RecyclerView.ViewHolder{
+        @BindView(R.id.message_user) TextView messageUser;
+        @BindView(R.id.message_text) TextView messageText;
+
+        public MessageViewHolder(View v){
+            super(v);
+            ButterKnife.bind(this, v);
+        }
+    }
+
 }
+
+
+
+
+
+
