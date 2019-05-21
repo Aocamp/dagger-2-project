@@ -7,5 +7,5 @@ import javax.inject.Scope;
 
 @Scope
 @Retention(RetentionPolicy.CLASS)
-public @interface MessageApplicationScope {
+public @interface ApplicationScope {
 }

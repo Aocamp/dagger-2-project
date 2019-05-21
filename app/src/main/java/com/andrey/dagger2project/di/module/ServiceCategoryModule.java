@@ -1,7 +1,7 @@
 package com.andrey.dagger2project.di.module;
 
+import com.andrey.dagger2project.api.ServiceCategoryApi;
 import com.andrey.dagger2project.di.annotation.ApplicationScope;
-import com.andrey.dagger2project.api.MessageApi;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -11,20 +11,19 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
-public class MessageModule {
-
+public class ServiceCategoryModule {
     @ApplicationScope
     @Provides
-    public MessageApi messageApi(Retrofit retrofit){
-        return retrofit.create(MessageApi.class);
+    public ServiceCategoryApi serviceCategoryApi(Retrofit retrofit){
+        return retrofit.create(ServiceCategoryApi.class);
     }
 
     @ApplicationScope
     @Provides
-    public Retrofit retrofit(GsonConverterFactory gsonConverterFactory, Gson gson){
+    public Retrofit retrofit(GsonConverterFactory gsonConverterFactory){
         return new Retrofit
                 .Builder()
-                .baseUrl("http://192.168.43.220:8080/com.api/rest/")
+                .baseUrl("https://api.yii2.test.wooppay.com/v1/")
                 .addConverterFactory(gsonConverterFactory)
                 .build();
     }

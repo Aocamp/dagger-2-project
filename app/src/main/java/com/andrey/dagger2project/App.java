@@ -2,20 +2,22 @@ package com.andrey.dagger2project;
 
 import android.app.Application;
 
-import com.andrey.dagger2project.component.DaggerMessageComponent;
+import com.andrey.dagger2project.di.component.DaggerMessageComponent;
 import com.andrey.dagger2project.di.component.MessageComponent;
+import com.andrey.dagger2project.di.component.ServiceCategoryComponent;
 
 public class App extends Application {
-    private MessageComponent component;
+    private MessageComponent messageComponent;
+    private ServiceCategoryComponent serviceCategoryComponent;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        component = DaggerMessageComponent.create();
+        messageComponent = DaggerMessageComponent.create();
     }
 
-    public MessageComponent getComponent() {
-        return component;
+    public MessageComponent getMessageComponent() {
+        return messageComponent;
     }
 }

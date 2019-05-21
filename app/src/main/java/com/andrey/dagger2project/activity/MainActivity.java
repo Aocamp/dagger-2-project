@@ -1,4 +1,4 @@
-package com.andrey.dagger2project;
+package com.andrey.dagger2project.activity;
 
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
+import com.andrey.dagger2project.App;
+import com.andrey.dagger2project.R;
 import com.andrey.dagger2project.adapter.MessageAdapter;
 import com.andrey.dagger2project.api.MessageApi;
 import com.andrey.dagger2project.di.component.MessageComponent;
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(mAdapter);
 
         App app = (App) getApplication();
-        MessageComponent component = app.getComponent();
+        MessageComponent component = app.getMessageComponent();
         messageApi = component.getMessageApi();
 
         loadAllMessages();
