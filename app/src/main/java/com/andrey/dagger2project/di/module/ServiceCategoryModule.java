@@ -1,16 +1,19 @@
 package com.andrey.dagger2project.di.module;
 
+import android.content.Context;
+
 import com.andrey.dagger2project.api.ServiceCategoryApi;
 import com.andrey.dagger2project.di.annotation.ApplicationScope;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.squareup.picasso.Picasso;
 
 import dagger.Module;
 import dagger.Provides;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-@Module
+@Module(includes = ContextModule.class)
 public class ServiceCategoryModule {
     @ApplicationScope
     @Provides

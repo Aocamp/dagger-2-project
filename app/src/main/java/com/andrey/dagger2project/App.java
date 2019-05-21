@@ -3,6 +3,7 @@ package com.andrey.dagger2project;
 import android.app.Application;
 
 import com.andrey.dagger2project.di.component.DaggerMessageComponent;
+import com.andrey.dagger2project.di.component.DaggerServiceCategoryComponent;
 import com.andrey.dagger2project.di.component.MessageComponent;
 import com.andrey.dagger2project.di.component.ServiceCategoryComponent;
 
@@ -15,9 +16,14 @@ public class App extends Application {
         super.onCreate();
 
         messageComponent = DaggerMessageComponent.create();
+        serviceCategoryComponent = DaggerServiceCategoryComponent.create();
     }
 
     public MessageComponent getMessageComponent() {
         return messageComponent;
+    }
+
+    public ServiceCategoryComponent getServiceCategoryComponent() {
+        return serviceCategoryComponent;
     }
 }

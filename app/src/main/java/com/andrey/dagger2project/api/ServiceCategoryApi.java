@@ -1,5 +1,7 @@
 package com.andrey.dagger2project.api;
 
+import com.andrey.dagger2project.model.ServiceCategory;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -12,5 +14,5 @@ public interface ServiceCategoryApi {
             "language: ru"
             })
     @GET("service-category")
-    Call<List<ServiceCategoryApi>> getAll();
+    Call<List<ServiceCategory>> getAll();
 }
