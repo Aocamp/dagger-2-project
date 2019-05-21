@@ -24,8 +24,6 @@ import retrofit2.Response;
 public class CategoryActivity extends AppCompatActivity {
     private ServiceCategoryApi serviceCategoryApi;
 
-    private Picasso picasso;
-
     private RecyclerView mRecyclerView;
     private ServiceCategoryAdapter mAdapter;
 
@@ -36,7 +34,7 @@ public class CategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
 
-        mRecyclerView = findViewById(R.id.recycler_view_messages);
+        mRecyclerView = findViewById(R.id.recycler_view_service_category);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new ServiceCategoryAdapter(CategoryActivity.this, serviceCategoryList);
         mRecyclerView.setAdapter(mAdapter);

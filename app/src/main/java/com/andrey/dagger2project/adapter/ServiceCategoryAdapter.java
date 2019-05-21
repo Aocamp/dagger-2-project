@@ -22,24 +22,24 @@ import butterknife.ButterKnife;
 public class ServiceCategoryAdapter extends RecyclerView.Adapter<ServiceCategoryAdapter.ServiceCategoryViewHolder> {
     private List<ServiceCategory> serviceCategoryList;
     private final LayoutInflater mInflater;
-    private Picasso picasso;
+    private Context mContext;
 
-    public ServiceCategoryAdapter(Context context, Picasso picasso, List<ServiceCategory> mList) {
+    public ServiceCategoryAdapter(Context context, List<ServiceCategory> mList) {
         serviceCategoryList = mList;
         mInflater = LayoutInflater.from(context);
-        this.picasso = picasso;
+        mContext = context;
     }
 
     @NonNull
     @Override
     public ServiceCategoryAdapter.ServiceCategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = mInflater.inflate(R.layout.message, parent, false);
+        View itemView = mInflater.inflate(R.layout.service_category, parent, false);
         return new ServiceCategoryAdapter.ServiceCategoryViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ServiceCategoryAdapter.ServiceCategoryViewHolder holder, int position) {
-        picasso.load(serviceCategoryList.get(position).getPictureUrl()).into(holder.picture);
+        Picasso.with(mContext).load(serviceCategoryList.get(position).getPictureUrl()).into(holder.picture);
         holder.title.setText(serviceCategoryList.get(position).getTitle());
     }
 
