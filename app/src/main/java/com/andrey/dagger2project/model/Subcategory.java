@@ -3,9 +3,7 @@ package com.andrey.dagger2project.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
-public class ServiceCategory {
+public class Subcategory {
     @SerializedName("id")
     @Expose
     private long id;
@@ -20,13 +18,13 @@ public class ServiceCategory {
     private String name;
     @SerializedName("picture")
     @Expose
-    private String picture;
+    private Object picture;
     @SerializedName("parent")
     @Expose
     private Object parent;
     @SerializedName("children")
     @Expose
-    private List<Subcategory> children = null;
+    private Object children;
     @SerializedName("blacklist")
     @Expose
     private Object blacklist;
@@ -69,11 +67,11 @@ public class ServiceCategory {
         this.name = name;
     }
 
-    public String getPicture() {
+    public Object getPicture() {
         return picture;
     }
 
-    public void setPicture(String picture) {
+    public void setPicture(Object picture) {
         this.picture = picture;
     }
 
@@ -85,11 +83,11 @@ public class ServiceCategory {
         this.parent = parent;
     }
 
-    public List<Subcategory> getChildren() {
+    public Object getChildren() {
         return children;
     }
 
-    public void setChildren(List<Subcategory> children) {
+    public void setChildren(Object children) {
         this.children = children;
     }
 
@@ -116,5 +114,4 @@ public class ServiceCategory {
     public void setPictureUrl(String pictureUrl) {
         this.pictureUrl = pictureUrl;
     }
-
 }

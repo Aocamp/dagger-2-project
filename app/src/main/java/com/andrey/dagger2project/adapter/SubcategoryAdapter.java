@@ -11,25 +11,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.andrey.dagger2project.R;
-import com.andrey.dagger2project.activity.SubcategoryActivity;
-import com.andrey.dagger2project.model.ServiceCategory;
-import com.google.gson.Gson;
+import com.andrey.dagger2project.activity.ServiceActivity;
+import com.andrey.dagger2project.model.Subcategory;
 import com.squareup.picasso.Picasso;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ServiceCategoryAdapter extends RecyclerView.Adapter<ServiceCategoryAdapter.ServiceCategoryViewHolder> {
+public class SubcategoryAdapter extends RecyclerView.Adapter<SubcategoryAdapter.SubcategoryViewHolder> {
     private final LayoutInflater mInflater;
-    private List<ServiceCategory> mServiceCategoryList;
+    private List<Subcategory> mServiceCategoryList;
     private Context mContext;
 
-    public ServiceCategoryAdapter(Context context, List<ServiceCategory> mList) {
+    public SubcategoryAdapter(Context context, List<Subcategory> mList) {
         mServiceCategoryList = mList;
         mInflater = LayoutInflater.from(context);
         mContext = context;
@@ -37,18 +33,18 @@ public class ServiceCategoryAdapter extends RecyclerView.Adapter<ServiceCategory
 
     @NonNull
     @Override
-    public ServiceCategoryAdapter.ServiceCategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public SubcategoryAdapter.SubcategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = mInflater.inflate(R.layout.service_category, parent, false);
-        return new ServiceCategoryAdapter.ServiceCategoryViewHolder(itemView);
+        return new SubcategoryAdapter.SubcategoryViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ServiceCategoryAdapter.ServiceCategoryViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SubcategoryAdapter.SubcategoryViewHolder holder, int position) {
         Picasso.with(mContext).load(mServiceCategoryList.get(position).getPictureUrl()).into(holder.picture);
         holder.title.setText(mServiceCategoryList.get(position).getTitle());
     }
 
-    public void setItem(List<ServiceCategory> messages){
+    public void setItem(List<Subcategory> messages){
         mServiceCategoryList = messages;
     }
 
@@ -63,13 +59,13 @@ public class ServiceCategoryAdapter extends RecyclerView.Adapter<ServiceCategory
         else return 0;
     }
 
-    class ServiceCategoryViewHolder extends RecyclerView.ViewHolder{
+    class SubcategoryViewHolder extends RecyclerView.ViewHolder{
         @BindView(R.id.picture)
         ImageView picture;
         @BindView(R.id.title)
         TextView title;
 
-        public ServiceCategoryViewHolder(View v){
+        public SubcategoryViewHolder(View v){
             super(v);
 
             ButterKnife.bind(this, v);
@@ -79,16 +75,10 @@ public class ServiceCategoryAdapter extends RecyclerView.Adapter<ServiceCategory
                 public void onClick(View view) {
                     RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) view.getTag();
                     int position = viewHolder.getAdapterPosition();
-                    ServiceCategory serviceCategory = mServiceCategoryList.get(position);
-                    Intent intent = new Intent(mContext, SubcategoryActivity.class);
-                    Gson gson = new Gson();
-                    try {
-                        JSONObject json = new JSONObject(gson.toJson(serviceCategory));
-                        intent.putExtra("subcategories", json.toString());
-                        mContext.startActivity(intent);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    Long id = mServiceCategoryList.get(position).getId();
+                    Intent intent = new Intent(mContext, ServiceActivity.class);
+                    intent.putExtra("id", id);
+                    mContext.startActivity(intent);
                 }
             };
             v.setOnClickListener(mOnItemClickListener);

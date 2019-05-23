@@ -11,8 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.andrey.dagger2project.R;
-import com.andrey.dagger2project.activity.SubcategoryActivity;
-import com.andrey.dagger2project.model.ServiceCategory;
+import com.andrey.dagger2project.activity.ServiceFieldActivity;
+import com.andrey.dagger2project.model.Service;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
@@ -24,52 +24,52 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ServiceCategoryAdapter extends RecyclerView.Adapter<ServiceCategoryAdapter.ServiceCategoryViewHolder> {
+public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceViewHolder>{
     private final LayoutInflater mInflater;
-    private List<ServiceCategory> mServiceCategoryList;
+    private List<Service> mServiceList;
     private Context mContext;
 
-    public ServiceCategoryAdapter(Context context, List<ServiceCategory> mList) {
-        mServiceCategoryList = mList;
+    public ServiceAdapter(Context context, List<Service> mList) {
+        mServiceList = mList;
         mInflater = LayoutInflater.from(context);
         mContext = context;
     }
 
     @NonNull
     @Override
-    public ServiceCategoryAdapter.ServiceCategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ServiceAdapter.ServiceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = mInflater.inflate(R.layout.service_category, parent, false);
-        return new ServiceCategoryAdapter.ServiceCategoryViewHolder(itemView);
+        return new ServiceAdapter.ServiceViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ServiceCategoryAdapter.ServiceCategoryViewHolder holder, int position) {
-        Picasso.with(mContext).load(mServiceCategoryList.get(position).getPictureUrl()).into(holder.picture);
-        holder.title.setText(mServiceCategoryList.get(position).getTitle());
+    public void onBindViewHolder(@NonNull ServiceAdapter.ServiceViewHolder holder, int position) {
+        Picasso.with(mContext).load(mServiceList.get(position).getPictureUrl()).into(holder.picture);
+        holder.title.setText(mServiceList.get(position).getTitle());
     }
 
-    public void setItem(List<ServiceCategory> messages){
-        mServiceCategoryList = messages;
+    public void setItem(List<Service> messages){
+        mServiceList = messages;
     }
 
     public void clearItem() {
-        mServiceCategoryList.clear();
+        mServiceList.clear();
     }
 
     @Override
     public int getItemCount() {
-        if (mServiceCategoryList != null)
-            return mServiceCategoryList.size();
+        if (mServiceList != null)
+            return mServiceList.size();
         else return 0;
     }
 
-    class ServiceCategoryViewHolder extends RecyclerView.ViewHolder{
+    class ServiceViewHolder extends RecyclerView.ViewHolder{
         @BindView(R.id.picture)
         ImageView picture;
         @BindView(R.id.title)
         TextView title;
 
-        public ServiceCategoryViewHolder(View v){
+        public ServiceViewHolder(View v){
             super(v);
 
             ButterKnife.bind(this, v);
@@ -79,12 +79,12 @@ public class ServiceCategoryAdapter extends RecyclerView.Adapter<ServiceCategory
                 public void onClick(View view) {
                     RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) view.getTag();
                     int position = viewHolder.getAdapterPosition();
-                    ServiceCategory serviceCategory = mServiceCategoryList.get(position);
-                    Intent intent = new Intent(mContext, SubcategoryActivity.class);
+                    Service service = mServiceList.get(position);
+                    Intent intent = new Intent(mContext, ServiceFieldActivity.class);
                     Gson gson = new Gson();
                     try {
-                        JSONObject json = new JSONObject(gson.toJson(serviceCategory));
-                        intent.putExtra("subcategories", json.toString());
+                        JSONObject json = new JSONObject(gson.toJson(service));
+                        intent.putExtra("service", json.toString());
                         mContext.startActivity(intent);
                     } catch (JSONException e) {
                         e.printStackTrace();

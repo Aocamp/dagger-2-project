@@ -12,7 +12,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 public class MessageModule {
-
     @ApplicationScope
     @Provides
     public MessageApi messageApi(Retrofit retrofit){
@@ -21,7 +20,7 @@ public class MessageModule {
 
     @ApplicationScope
     @Provides
-    public Retrofit retrofit(GsonConverterFactory gsonConverterFactory, Gson gson){
+    public Retrofit retrofit(GsonConverterFactory gsonConverterFactory){
         return new Retrofit
                 .Builder()
                 .baseUrl("http://192.168.43.220:8080/com.api/rest/")

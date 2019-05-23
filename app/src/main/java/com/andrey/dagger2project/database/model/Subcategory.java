@@ -1,41 +1,38 @@
-package com.andrey.dagger2project.model;
+package com.andrey.dagger2project.database.model;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
 
-import java.util.List;
-
-public class ServiceCategory {
-    @SerializedName("id")
-    @Expose
+@Entity(tableName = "subcategories",
+        foreignKeys = @ForeignKey(
+        entity = ServiceCategory.class,
+        parentColumns = "id",
+        childColumns = "service_category_id"))
+public class Subcategory {
+    @PrimaryKey
     private long id;
-    @SerializedName("parent_id")
-    @Expose
+    @ColumnInfo(name = "parent_id")
     private long parentId;
-    @SerializedName("title")
-    @Expose
-    private String title;
-    @SerializedName("name")
-    @Expose
-    private String name;
-    @SerializedName("picture")
-    @Expose
-    private String picture;
-    @SerializedName("parent")
-    @Expose
-    private Object parent;
-    @SerializedName("children")
-    @Expose
-    private List<Subcategory> children = null;
-    @SerializedName("blacklist")
-    @Expose
-    private Object blacklist;
-    @SerializedName("language")
-    @Expose
-    private String language;
-    @SerializedName("picture_url")
-    @Expose
+    @ColumnInfo(name = "picture_url")
     private String pictureUrl;
+    @ColumnInfo(name = "service_category_id")
+    private long serviceCategoryId;
+
+    private String title;
+    private String name;
+    private String language;
+
+    @Ignore
+    private Object picture;
+    @Ignore
+    private Object parent;
+    @Ignore
+    private Object children;
+    @Ignore
+    private Object blacklist;
 
     public long getId() {
         return id;
@@ -69,11 +66,11 @@ public class ServiceCategory {
         this.name = name;
     }
 
-    public String getPicture() {
+    public Object getPicture() {
         return picture;
     }
 
-    public void setPicture(String picture) {
+    public void setPicture(Object picture) {
         this.picture = picture;
     }
 
@@ -85,11 +82,11 @@ public class ServiceCategory {
         this.parent = parent;
     }
 
-    public List<Subcategory> getChildren() {
+    public Object getChildren() {
         return children;
     }
 
-    public void setChildren(List<Subcategory> children) {
+    public void setChildren(Object children) {
         this.children = children;
     }
 
@@ -117,4 +114,11 @@ public class ServiceCategory {
         this.pictureUrl = pictureUrl;
     }
 
+    public long getServiceCategoryId() {
+        return serviceCategoryId;
+    }
+
+    public void setServiceCategoryId(long serviceCategoryId) {
+        this.serviceCategoryId = serviceCategoryId;
+    }
 }

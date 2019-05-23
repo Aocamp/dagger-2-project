@@ -13,7 +13,6 @@ import com.andrey.dagger2project.adapter.ServiceCategoryAdapter;
 import com.andrey.dagger2project.api.ServiceCategoryApi;
 import com.andrey.dagger2project.di.component.ServiceCategoryComponent;
 import com.andrey.dagger2project.model.ServiceCategory;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -21,44 +20,46 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CategoryActivity extends AppCompatActivity {
-    private ServiceCategoryApi serviceCategoryApi;
-
+public class ServiceCategoryActivity extends AppCompatActivity {
+    private ServiceCategoryApi mServiceCategoryApi;
     private RecyclerView mRecyclerView;
     private ServiceCategoryAdapter mAdapter;
-
-    private List<ServiceCategory> serviceCategoryList;
+    private List<ServiceCategory> mServiceCategoryList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
 
-        mRecyclerView = findViewById(R.id.recycler_view_service_category);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new ServiceCategoryAdapter(CategoryActivity.this, serviceCategoryList);
-        mRecyclerView.setAdapter(mAdapter);
+        initRecyclerView();
 
         App app = (App) getApplication();
         ServiceCategoryComponent component = app.getServiceCategoryComponent();
-        serviceCategoryApi = component.getServiceCategoryApi();
+        mServiceCategoryApi = component.getServiceCategoryApi();
 
         loadAllCategories();
     }
 
+    private void initRecyclerView(){
+        mRecyclerView = findViewById(R.id.recycler_view_service_category);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mAdapter = new ServiceCategoryAdapter(ServiceCategoryActivity.this, mServiceCategoryList);
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
     private void loadAllCategories() {
-        Call<List<ServiceCategory>> serviceCategoryCall = serviceCategoryApi.getAll();
+        Call<List<ServiceCategory>> serviceCategoryCall = mServiceCategoryApi.getAll();
         serviceCategoryCall.enqueue(new Callback<List<ServiceCategory>>() {
             @Override
             public void onResponse(@NonNull Call<List<ServiceCategory>> call, @NonNull Response<List<ServiceCategory>> response) {
-                List<ServiceCategory> message = response.body();
-                mAdapter.setItem(message);
+                mServiceCategoryList = response.body();
+                mAdapter.setItem(mServiceCategoryList);
                 mAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onFailure(@NonNull Call<List<ServiceCategory>> call, @NonNull Throwable t) {
-                Toast.makeText(CategoryActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(ServiceCategoryActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }

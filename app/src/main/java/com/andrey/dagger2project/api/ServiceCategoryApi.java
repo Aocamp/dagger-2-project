@@ -7,12 +7,14 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ServiceCategoryApi {
     @Headers({
             "partner-name: wooppay_kz",
             "language: ru"
             })
-    @GET("service-category")
+    @GET("service-category?expand=children")
     Call<List<ServiceCategory>> getAll();
 }

@@ -2,6 +2,7 @@ package com.andrey.dagger2project.di.module;
 
 import android.content.Context;
 
+import com.andrey.dagger2project.api.ServiceApi;
 import com.andrey.dagger2project.api.ServiceCategoryApi;
 import com.andrey.dagger2project.di.annotation.ApplicationScope;
 import com.google.gson.Gson;
@@ -13,12 +14,18 @@ import dagger.Provides;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-@Module(includes = ContextModule.class)
+@Module
 public class ServiceCategoryModule {
     @ApplicationScope
     @Provides
     public ServiceCategoryApi serviceCategoryApi(Retrofit retrofit){
         return retrofit.create(ServiceCategoryApi.class);
+    }
+
+    @ApplicationScope
+    @Provides
+    public ServiceApi serviceApi(Retrofit retrofit){
+        return retrofit.create(ServiceApi.class);
     }
 
     @ApplicationScope

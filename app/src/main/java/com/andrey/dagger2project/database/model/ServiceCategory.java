@@ -1,41 +1,28 @@
-package com.andrey.dagger2project.model;
+package com.andrey.dagger2project.database.model;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
 
-import java.util.List;
-
+@Entity(tableName = "service_categories")
 public class ServiceCategory {
-    @SerializedName("id")
-    @Expose
+    @PrimaryKey
     private long id;
-    @SerializedName("parent_id")
-    @Expose
+    @ColumnInfo(name = "parent_id")
     private long parentId;
-    @SerializedName("title")
-    @Expose
-    private String title;
-    @SerializedName("name")
-    @Expose
-    private String name;
-    @SerializedName("picture")
-    @Expose
-    private String picture;
-    @SerializedName("parent")
-    @Expose
-    private Object parent;
-    @SerializedName("children")
-    @Expose
-    private List<Subcategory> children = null;
-    @SerializedName("blacklist")
-    @Expose
-    private Object blacklist;
-    @SerializedName("language")
-    @Expose
-    private String language;
-    @SerializedName("picture_url")
-    @Expose
+    @ColumnInfo(name = "picture_url")
     private String pictureUrl;
+
+    private String title;
+    private String name;
+    private String picture;
+    private String language;
+
+    @Ignore
+    private Object parent;
+    @Ignore
+    private Object blacklist;
 
     public long getId() {
         return id;
@@ -83,14 +70,6 @@ public class ServiceCategory {
 
     public void setParent(Object parent) {
         this.parent = parent;
-    }
-
-    public List<Subcategory> getChildren() {
-        return children;
-    }
-
-    public void setChildren(List<Subcategory> children) {
-        this.children = children;
     }
 
     public Object getBlacklist() {
