@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.andrey.dagger2project.R;
 import com.andrey.dagger2project.activity.SubcategoryActivity;
-import com.andrey.dagger2project.model.ServiceCategory;
+import com.andrey.dagger2project.database.model.ServiceCategory;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
@@ -85,6 +85,7 @@ public class ServiceCategoryAdapter extends RecyclerView.Adapter<ServiceCategory
                     try {
                         JSONObject json = new JSONObject(gson.toJson(serviceCategory));
                         intent.putExtra("subcategories", json.toString());
+                        intent.putExtra("id", serviceCategory.getId());
                         mContext.startActivity(intent);
                     } catch (JSONException e) {
                         e.printStackTrace();

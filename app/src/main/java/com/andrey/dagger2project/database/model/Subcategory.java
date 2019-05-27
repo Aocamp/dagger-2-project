@@ -1,12 +1,14 @@
-package com.andrey.dagger2project.model;
+package com.andrey.dagger2project.database.model;
+
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Ignore;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Subcategory {
-    @SerializedName("id")
-    @Expose
-    private long id;
+@Entity(foreignKeys = @ForeignKey(entity = ServiceCategory.class, parentColumns = "id", childColumns = "parentId"))
+public class Subcategory extends BaseModel {
     @SerializedName("parent_id")
     @Expose
     private long parentId;
@@ -18,15 +20,19 @@ public class Subcategory {
     private String name;
     @SerializedName("picture")
     @Expose
+    @Ignore
     private Object picture;
     @SerializedName("parent")
     @Expose
+    @Ignore
     private Object parent;
     @SerializedName("children")
     @Expose
+    @Ignore
     private Object children;
     @SerializedName("blacklist")
     @Expose
+    @Ignore
     private Object blacklist;
     @SerializedName("language")
     @Expose
@@ -34,14 +40,6 @@ public class Subcategory {
     @SerializedName("picture_url")
     @Expose
     private String pictureUrl;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public long getParentId() {
         return parentId;

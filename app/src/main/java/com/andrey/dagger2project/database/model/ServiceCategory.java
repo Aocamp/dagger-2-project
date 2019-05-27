@@ -1,22 +1,45 @@
-package com.andrey.dagger2project.database.entity;
+package com.andrey.dagger2project.database.model;
 
-import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Ignore;
 
-@Entity(tableName = "categories", foreignKeys = @ForeignKey(entity = Service.class, parentColumns = "id", childColumns = "serviceId"))
-public class Category extends BaseModel {
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
+@Entity
+public class ServiceCategory extends BaseModel {
+    @SerializedName("parent_id")
+    @Expose
     private long parentId;
+    @SerializedName("title")
+    @Expose
     private String title;
+    @SerializedName("name")
+    @Expose
     private String name;
+    @SerializedName("picture")
+    @Expose
     private String picture;
+    @SerializedName("parent")
+    @Expose
+    @Ignore
     private Object parent;
-    private Object children;
+    @SerializedName("children")
+    @Expose
+    @Ignore
+    private List<Subcategory> children = null;
+    @SerializedName("blacklist")
+    @Expose
+    @Ignore
     private Object blacklist;
+    @SerializedName("language")
+    @Expose
     private String language;
+    @SerializedName("picture_url")
+    @Expose
     private String pictureUrl;
-    @ColumnInfo(index = true)
-    private long serviceId;
 
     public long getParentId() {
         return parentId;
@@ -58,11 +81,11 @@ public class Category extends BaseModel {
         this.parent = parent;
     }
 
-    public Object getChildren() {
+    public List<Subcategory> getChildren() {
         return children;
     }
 
-    public void setChildren(Object children) {
+    public void setChildren(List<Subcategory> children) {
         this.children = children;
     }
 
@@ -90,11 +113,4 @@ public class Category extends BaseModel {
         this.pictureUrl = pictureUrl;
     }
 
-    public long getServiceId() {
-        return serviceId;
-    }
-
-    public void setServiceId(long serviceId) {
-        this.serviceId = serviceId;
-    }
 }

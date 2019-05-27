@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.andrey.dagger2project.R;
 import com.andrey.dagger2project.activity.ServiceActivity;
-import com.andrey.dagger2project.model.Subcategory;
+import com.andrey.dagger2project.database.model.Subcategory;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

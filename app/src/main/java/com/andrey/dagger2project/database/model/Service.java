@@ -1,19 +1,21 @@
-package com.andrey.dagger2project.model;
+package com.andrey.dagger2project.database.model;
+
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Service {
-    @SerializedName("id")
-    @Expose
-    private long id;
+@Entity
+public class Service extends BaseModel {
     @SerializedName("name")
     @Expose
     private String name;
     @SerializedName("parent_id")
     @Expose
+    @Ignore
     private Object parentId;
     @SerializedName("title")
     @Expose
@@ -32,6 +34,7 @@ public class Service {
     private String picture;
     @SerializedName("synonyms")
     @Expose
+    @Ignore
     private List<String> synonyms = null;
     @SerializedName("type")
     @Expose
@@ -53,15 +56,19 @@ public class Service {
     private String updatedAt;
     @SerializedName("fields")
     @Expose
+    @Ignore
     private List<Field> fields = null;
     @SerializedName("categories")
     @Expose
+    @Ignore
     private List<Category> categories = null;
     @SerializedName("children")
     @Expose
-    private List<Subservice> children = null;
+    @Ignore
+    private List<SubService> children = null;
     @SerializedName("parent")
     @Expose
+    @Ignore
     private Object parent;
     @SerializedName("blacklist")
     @Expose
@@ -69,14 +76,6 @@ public class Service {
     @SerializedName("picture_url")
     @Expose
     private String pictureUrl;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -206,11 +205,11 @@ public class Service {
         this.categories = categories;
     }
 
-    public List<Subservice> getChildren() {
+    public List<SubService> getChildren() {
         return children;
     }
 
-    public void setChildren(List<Subservice> children) {
+    public void setChildren(List<SubService> children) {
         this.children = children;
     }
 

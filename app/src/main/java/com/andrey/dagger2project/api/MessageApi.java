@@ -1,6 +1,6 @@
 package com.andrey.dagger2project.api;
 
-import com.andrey.dagger2project.model.Message;
+import com.andrey.dagger2project.database.model.Message;
 
 import java.util.List;
 

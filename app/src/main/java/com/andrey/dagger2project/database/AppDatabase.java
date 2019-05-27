@@ -6,13 +6,15 @@ import com.andrey.dagger2project.database.dao.FieldDao;
 import com.andrey.dagger2project.database.dao.ServiceCategoryDao;
 import com.andrey.dagger2project.database.dao.ServiceDao;
 import com.andrey.dagger2project.database.dao.SubcategoryDao;
-import com.andrey.dagger2project.database.entity.Field;
-import com.andrey.dagger2project.database.entity.Service;
-import com.andrey.dagger2project.database.entity.ServiceCategory;
-import com.andrey.dagger2project.database.entity.Subcategory;
+import com.andrey.dagger2project.database.model.Category;
+import com.andrey.dagger2project.database.model.Field;
+import com.andrey.dagger2project.database.model.Service;
+import com.andrey.dagger2project.database.model.ServiceCategory;
+import com.andrey.dagger2project.database.model.SubService;
+import com.andrey.dagger2project.database.model.Subcategory;
 
 @android.arch.persistence.room.Database(
-        entities = {Field.class, Service.class, ServiceCategory.class, Subcategory.class},
+        entities = {Field.class, Service.class, ServiceCategory.class, Subcategory.class, SubService.class, Category.class, },
         version = 1,
         exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {

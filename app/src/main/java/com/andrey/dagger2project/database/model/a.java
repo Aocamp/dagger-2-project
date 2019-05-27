@@ -1,9 +1,9 @@
-package com.andrey.dagger2project.database.entity;
+package com.andrey.dagger2project.database.model;
 
 import android.arch.persistence.room.Entity;
 
 @Entity(tableName = "")
-public class a extends BaseModel{
+public class a extends BaseModel {
     private long serviceCategoryId;
     private long serviceId;
 

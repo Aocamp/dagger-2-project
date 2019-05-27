@@ -1,6 +1,6 @@
 package com.andrey.dagger2project.database.repository;
 
-import com.andrey.dagger2project.database.entity.ServiceCategory;
+import com.andrey.dagger2project.database.model.ServiceCategory;
 
 public interface ServiceCategoryRepository extends BaseRepository<ServiceCategory> {
 

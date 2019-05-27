@@ -13,7 +13,7 @@ import com.andrey.dagger2project.R;
 import com.andrey.dagger2project.adapter.ServiceAdapter;
 import com.andrey.dagger2project.api.ServiceApi;
 import com.andrey.dagger2project.di.component.ServiceCategoryComponent;
-import com.andrey.dagger2project.model.Service;
+import com.andrey.dagger2project.database.model.Service;
 
 import java.util.List;
 

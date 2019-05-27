@@ -1,20 +1,45 @@
-package com.andrey.dagger2project.database.entity;
+package com.andrey.dagger2project.database.model;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
 
-@Entity(tableName = "service_categories")
-public class ServiceCategory extends BaseModel {
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+@Entity(foreignKeys = @ForeignKey(entity = Service.class, parentColumns = "id", childColumns = "serviceId"))
+public class Category extends BaseModel{
+    @SerializedName("parent_id")
+    @Expose
     private long parentId;
-    private String pictureUrl;
+    @SerializedName("title")
+    @Expose
     private String title;
+    @SerializedName("name")
+    @Expose
     private String name;
+    @SerializedName("picture")
+    @Expose
     private String picture;
-    private String language;
+    @SerializedName("parent")
+    @Expose
     @Ignore
     private Object parent;
+    @SerializedName("children")
+    @Expose
+    @Ignore
+    private Object children;
+    @SerializedName("blacklist")
+    @Expose
     @Ignore
     private Object blacklist;
+    @SerializedName("language")
+    @Expose
+    private String language;
+    @SerializedName("picture_url")
+    @Expose
+    private String pictureUrl;
+    private long serviceId;
 
     public long getParentId() {
         return parentId;
@@ -56,6 +81,14 @@ public class ServiceCategory extends BaseModel {
         this.parent = parent;
     }
 
+    public Object getChildren() {
+        return children;
+    }
+
+    public void setChildren(Object children) {
+        this.children = children;
+    }
+
     public Object getBlacklist() {
         return blacklist;
     }
@@ -78,5 +111,13 @@ public class ServiceCategory extends BaseModel {
 
     public void setPictureUrl(String pictureUrl) {
         this.pictureUrl = pictureUrl;
+    }
+
+    public long getServiceId() {
+        return serviceId;
+    }
+
+    public void setServiceId(long serviceId) {
+        this.serviceId = serviceId;
     }
 }

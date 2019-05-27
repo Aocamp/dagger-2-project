@@ -1,14 +1,18 @@
-package com.andrey.dagger2project.model;
+package com.andrey.dagger2project.database.model;
+
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Ignore;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Field {
-    @SerializedName("id")
-    @Expose
-    private long id;
+@Entity(foreignKeys = {
+        @ForeignKey(entity = Service.class, parentColumns = "id", childColumns = "serviceId"),
+        @ForeignKey(entity = SubService.class, parentColumns = "id", childColumns = "serviceId") })
+public class Field extends BaseModel {
     @SerializedName("service_id")
     @Expose
     private long serviceId;
@@ -38,18 +42,23 @@ public class Field {
     private boolean unmask;
     @SerializedName("value")
     @Expose
+    @Ignore
     private Object value;
     @SerializedName("steps")
     @Expose
+    @Ignore
     private List<Long> steps = null;
     @SerializedName("validations")
     @Expose
+    @Ignore
     private Object validations;
     @SerializedName("values")
     @Expose
+    @Ignore
     private Object values;
     @SerializedName("blacklist")
     @Expose
+    @Ignore
     private Object blacklist;
     @SerializedName("is_need_send")
     @Expose
@@ -57,14 +66,6 @@ public class Field {
     @SerializedName("title")
     @Expose
     private String title;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public long getServiceId() {
         return serviceId;

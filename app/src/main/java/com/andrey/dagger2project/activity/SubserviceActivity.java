@@ -7,10 +7,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.andrey.dagger2project.R;
-import com.andrey.dagger2project.adapter.ServiceAdapter;
 import com.andrey.dagger2project.adapter.SubserviceAdapter;
-import com.andrey.dagger2project.model.Service;
-import com.andrey.dagger2project.model.Subservice;
+import com.andrey.dagger2project.database.model.Service;
+import com.andrey.dagger2project.database.model.SubService;
 import com.google.gson.Gson;
 
 import java.util.List;
@@ -18,7 +17,7 @@ import java.util.List;
 public class SubserviceActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private SubserviceAdapter mAdapter;
-    private List<Subservice> mSubserviceList;
+    private List<SubService> mSubServiceList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +32,7 @@ public class SubserviceActivity extends AppCompatActivity {
     private void initRecyclerView(){
         mRecyclerView = findViewById(R.id.recycler_view_subservice);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new SubserviceAdapter(SubserviceActivity.this, mSubserviceList);
+        mAdapter = new SubserviceAdapter(SubserviceActivity.this, mSubServiceList);
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -41,8 +40,8 @@ public class SubserviceActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Gson gson = new Gson();
         Service category = gson.fromJson(intent.getStringExtra("service"), Service.class);
-        mSubserviceList = category.getChildren();
-        mAdapter.setItem(mSubserviceList);
+        mSubServiceList = category.getChildren();
+        mAdapter.setItem(mSubServiceList);
         mAdapter.notifyDataSetChanged();
     }
 

@@ -4,7 +4,7 @@ import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Update;
 
-import com.andrey.dagger2project.database.entity.BaseModel;
+import com.andrey.dagger2project.database.model.BaseModel;
 
 import java.util.List;
 

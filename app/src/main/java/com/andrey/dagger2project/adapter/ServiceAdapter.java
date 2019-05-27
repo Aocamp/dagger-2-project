@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.andrey.dagger2project.R;
 import com.andrey.dagger2project.activity.ServiceFieldActivity;
 import com.andrey.dagger2project.activity.SubserviceActivity;
-import com.andrey.dagger2project.model.Service;
+import com.andrey.dagger2project.database.model.Service;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 

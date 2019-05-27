@@ -1,4 +1,4 @@
-package com.andrey.dagger2project.model;
+package com.andrey.dagger2project.database.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

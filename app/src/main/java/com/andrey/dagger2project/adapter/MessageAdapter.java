@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.andrey.dagger2project.R;
-import com.andrey.dagger2project.model.Message;
+import com.andrey.dagger2project.database.model.Message;
 
 import java.util.List;
 

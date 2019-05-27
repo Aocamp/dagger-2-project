@@ -11,16 +11,16 @@ import com.andrey.dagger2project.App;
 import com.andrey.dagger2project.R;
 import com.andrey.dagger2project.adapter.ServiceCategoryAdapter;
 import com.andrey.dagger2project.api.ServiceCategoryApi;
+import com.andrey.dagger2project.database.model.Subcategory;
 import com.andrey.dagger2project.database.repository.ServiceCategoryRepository;
+import com.andrey.dagger2project.database.repository.SubcategoryRepository;
 import com.andrey.dagger2project.di.component.DaggerRoomComponent;
 import com.andrey.dagger2project.di.component.ServiceCategoryComponent;
 import com.andrey.dagger2project.di.module.AppModule;
 import com.andrey.dagger2project.di.module.RoomModule;
-import com.andrey.dagger2project.model.ServiceCategory;
-import com.andrey.dagger2project.model.Subcategory;
+import com.andrey.dagger2project.database.model.ServiceCategory;
 
 import java.util.List;
-
 
 import javax.inject.Inject;
 
@@ -32,9 +32,13 @@ public class ServiceCategoryActivity extends AppCompatActivity {
     private ServiceCategoryApi mServiceCategoryApi;
     private ServiceCategoryAdapter mAdapter;
     private List<ServiceCategory> mServiceCategoryList;
+    private List<Subcategory> mSubcategoryList;
 
     @Inject
-    private ServiceCategoryRepository repository;
+    ServiceCategoryRepository repository;
+
+    @Inject
+    SubcategoryRepository subcategoryRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +77,11 @@ public class ServiceCategoryActivity extends AppCompatActivity {
                 mServiceCategoryList = response.body();
                 mAdapter.setItem(mServiceCategoryList);
                 mAdapter.notifyDataSetChanged();
-
                 repository.insertAll(mServiceCategoryList);
+
+                for (ServiceCategory service: mServiceCategoryList){
+                    mSubcategoryList.add((Subcategory) service.getChildren());
+                }
             }
 
             @Override

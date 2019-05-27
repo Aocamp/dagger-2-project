@@ -12,8 +12,7 @@ import android.widget.TextView;
 
 import com.andrey.dagger2project.R;
 import com.andrey.dagger2project.activity.ServiceFieldActivity;
-import com.andrey.dagger2project.activity.SubserviceActivity;
-import com.andrey.dagger2project.model.Subservice;
+import com.andrey.dagger2project.database.model.SubService;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
@@ -27,11 +26,11 @@ import butterknife.ButterKnife;
 
 public class SubserviceAdapter extends RecyclerView.Adapter<SubserviceAdapter.SubserviceViewHolder>{
     private final LayoutInflater mInflater;
-    private List<Subservice> mSubserviceList;
+    private List<SubService> mSubServiceList;
     private Context mContext;
 
-    public SubserviceAdapter(Context context, List<Subservice> mList) {
-        mSubserviceList = mList;
+    public SubserviceAdapter(Context context, List<SubService> mList) {
+        mSubServiceList = mList;
         mInflater = LayoutInflater.from(context);
         mContext = context;
     }
@@ -45,22 +44,22 @@ public class SubserviceAdapter extends RecyclerView.Adapter<SubserviceAdapter.Su
 
     @Override
     public void onBindViewHolder(@NonNull SubserviceAdapter.SubserviceViewHolder holder, int position) {
-        Picasso.with(mContext).load(mSubserviceList.get(position).getPictureUrl()).into(holder.picture);
-        holder.title.setText(mSubserviceList.get(position).getTitle());
+        Picasso.with(mContext).load(mSubServiceList.get(position).getPictureUrl()).into(holder.picture);
+        holder.title.setText(mSubServiceList.get(position).getTitle());
     }
 
-    public void setItem(List<Subservice> messages){
-        mSubserviceList = messages;
+    public void setItem(List<SubService> messages){
+        mSubServiceList = messages;
     }
 
     public void clearItem() {
-        mSubserviceList.clear();
+        mSubServiceList.clear();
     }
 
     @Override
     public int getItemCount() {
-        if (mSubserviceList != null)
-            return mSubserviceList.size();
+        if (mSubServiceList != null)
+            return mSubServiceList.size();
         else return 0;
     }
 
@@ -80,7 +79,7 @@ public class SubserviceAdapter extends RecyclerView.Adapter<SubserviceAdapter.Su
                 public void onClick(View view) {
                     RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) view.getTag();
                     int position = viewHolder.getAdapterPosition();
-                    Subservice service = mSubserviceList.get(position);
+                    SubService service = mSubServiceList.get(position);
                     Gson gson = new Gson();
                     try {
                         JSONObject json = new JSONObject(gson.toJson(service));

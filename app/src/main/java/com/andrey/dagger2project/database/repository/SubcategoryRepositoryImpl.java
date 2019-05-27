@@ -3,7 +3,7 @@ package com.andrey.dagger2project.database.repository;
 import android.arch.lifecycle.LiveData;
 
 import com.andrey.dagger2project.database.dao.SubcategoryDao;
-import com.andrey.dagger2project.database.entity.Subcategory;
+import com.andrey.dagger2project.database.model.Subcategory;
 
 import java.util.List;
 

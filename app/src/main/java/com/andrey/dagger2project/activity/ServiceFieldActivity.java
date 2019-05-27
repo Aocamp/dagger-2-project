@@ -1,19 +1,15 @@
 package com.andrey.dagger2project.activity;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import com.andrey.dagger2project.R;
-import com.andrey.dagger2project.model.Field;
-import com.andrey.dagger2project.model.Service;
+import com.andrey.dagger2project.database.model.Field;
+import com.andrey.dagger2project.database.model.Service;
 import com.google.gson.Gson;
 
 import java.util.HashMap;

@@ -12,7 +12,7 @@ import com.andrey.dagger2project.R;
 import com.andrey.dagger2project.adapter.MessageAdapter;
 import com.andrey.dagger2project.api.MessageApi;
 import com.andrey.dagger2project.di.component.MessageComponent;
-import com.andrey.dagger2project.model.Message;
+import com.andrey.dagger2project.database.model.Message;
 
 import java.util.List;
 
