@@ -10,14 +10,10 @@ import android.widget.Toast;
 
 import com.andrey.dagger2project.App;
 import com.andrey.dagger2project.R;
-import com.andrey.dagger2project.adapter.MessageAdapter;
 import com.andrey.dagger2project.adapter.ServiceAdapter;
 import com.andrey.dagger2project.api.ServiceApi;
-import com.andrey.dagger2project.di.component.MessageComponent;
 import com.andrey.dagger2project.di.component.ServiceCategoryComponent;
-import com.andrey.dagger2project.model.Message;
 import com.andrey.dagger2project.model.Service;
-import com.andrey.dagger2project.model.ServiceCategory;
 
 import java.util.List;
 
@@ -36,10 +32,7 @@ public class ServiceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service);
 
-        mRecyclerView = findViewById(R.id.recycler_view_service);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new ServiceAdapter(ServiceActivity.this, mServiceList);
-        mRecyclerView.setAdapter(mAdapter);
+        initRecyclerView();
 
         App app = (App) getApplication();
         ServiceCategoryComponent component = app.getServiceCategoryComponent();
@@ -48,10 +41,18 @@ public class ServiceActivity extends AppCompatActivity {
         loadAllMessages();
     }
 
+    private void initRecyclerView(){
+        mRecyclerView = findViewById(R.id.recycler_view_service);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mAdapter = new ServiceAdapter(ServiceActivity.this, mServiceList);
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
     private void loadAllMessages() {
         Intent intent = getIntent();
         Long id = intent.getLongExtra("id", 0);
-        Call<List<Service>> serviceCall = mServiceApi.getBySubcategoryId(id);
+        String expand = "children";
+        Call<List<Service>> serviceCall = mServiceApi.getBySubcategoryId(id, expand);
         serviceCall.enqueue(new Callback<List<Service>>() {
             @Override
             public void onResponse(@NonNull Call<List<Service>> call, @NonNull Response<List<Service>> response) {

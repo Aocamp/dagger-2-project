@@ -3,7 +3,7 @@ package com.andrey.dagger2project.database.repository;
 import android.arch.lifecycle.LiveData;
 
 import com.andrey.dagger2project.database.dao.ServiceCategoryDao;
-import com.andrey.dagger2project.database.model.ServiceCategory;
+import com.andrey.dagger2project.database.entity.ServiceCategory;
 
 import java.util.List;
 
@@ -23,8 +23,8 @@ public class ServiceCategoryRepositoryImpl implements ServiceCategoryRepository 
     }
 
     @Override
-    public void insertAll(ServiceCategory... serviceCategories) {
-        dao.insertAll(serviceCategories);
+    public void insertAll(List<ServiceCategory> t) {
+        dao.insertAll(t);
     }
 
     @Override

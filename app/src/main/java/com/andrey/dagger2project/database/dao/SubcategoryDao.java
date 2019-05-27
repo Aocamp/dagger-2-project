@@ -2,27 +2,20 @@ package com.andrey.dagger2project.database.dao;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
-import com.andrey.dagger2project.database.model.Subcategory;
+import com.andrey.dagger2project.database.entity.Subcategory;
 
 import java.util.List;
 
 @Dao
-public interface SubcategoryDao {
-    @Insert
-    void insert (Subcategory serviceCategory);
-
-    @Insert
-    void insertAll (Subcategory... serviceCategories);
-
-    @Query("DELETE FROM service_categories")
+public interface SubcategoryDao extends BaseDao<Subcategory> {
+    @Query("DELETE FROM subcategories")
     void deleteAll();
 
-    @Query("SELECT * FROM service_categories")
+    @Query("SELECT * FROM subcategories")
     LiveData<List<Subcategory>> getAll();
 
-    @Query("SELECT * FROM subcategories WHERE parent_id = :id ")
-    LiveData<List<Subcategory>> getAllById(Long id);
+    @Query("SELECT * FROM subcategories WHERE parentId = :id ")
+    LiveData<List<Subcategory>> getAllByCategoryId(Long id);
 }

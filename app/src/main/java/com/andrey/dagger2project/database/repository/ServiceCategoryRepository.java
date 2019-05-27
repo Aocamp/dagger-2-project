@@ -1,17 +1,7 @@
 package com.andrey.dagger2project.database.repository;
 
-import android.arch.lifecycle.LiveData;
+import com.andrey.dagger2project.database.entity.ServiceCategory;
 
-import com.andrey.dagger2project.database.model.ServiceCategory;
+public interface ServiceCategoryRepository extends BaseRepository<ServiceCategory> {
 
-import java.util.List;
-
-public interface ServiceCategoryRepository {
-    void insert (ServiceCategory serviceCategory);
-
-    void insertAll (ServiceCategory... serviceCategories);
-
-    void deleteAll();
-
-    LiveData<List<ServiceCategory>> getAll();
 }

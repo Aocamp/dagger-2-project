@@ -15,6 +15,6 @@ public interface ServiceCategoryApi {
             "partner-name: wooppay_kz",
             "language: ru"
             })
-    @GET("service-category?expand=children")
-    Call<List<ServiceCategory>> getAll();
+    @GET("service-category")
+    Call<List<ServiceCategory>> getAll(@Query("expand") String children);
 }

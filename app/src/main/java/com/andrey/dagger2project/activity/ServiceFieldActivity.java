@@ -47,11 +47,6 @@ public class ServiceFieldActivity extends AppCompatActivity {
     }
 
     private void generateEditText(List<Field> fieldList){
-        int top = 10;
-        int left = 40;
-        int right = 0;
-        int bottom = 0;
-
         for (Field field: fieldList){
             if (!field.isHidden()){
                 if (!field.getName().equals("game_amount")){
@@ -59,7 +54,6 @@ public class ServiceFieldActivity extends AppCompatActivity {
 
                     EditText et = new EditText(this);
                     et.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-                    et.setPadding(left, top, right, bottom);
                     et.setHint(field.getTitle());
 
                     if (field.getType().equals("string")){

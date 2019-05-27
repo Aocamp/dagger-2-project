@@ -1,22 +1,17 @@
-package com.andrey.dagger2project.database.model;
+package com.andrey.dagger2project.database.entity;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
-import android.arch.persistence.room.PrimaryKey;
 
 import java.util.List;
 
-@Entity(tableName = "fields")
-public class Field {
-    @PrimaryKey
-    private long id;
-    @ColumnInfo(name = "service_id")
+@Entity(tableName = "fields", foreignKeys = @ForeignKey(entity = Service.class, parentColumns = "id", childColumns = "serviceId"))
+public class Field extends BaseModel {
+    @ColumnInfo(index = true)
     private long serviceId;
-    @ColumnInfo(name = "is_need_send")
     private boolean isNeedSend;
-
     private String name;
     private String type;
     private long sort;
@@ -26,7 +21,6 @@ public class Field {
     private String mask;
     private boolean unmask;
     private String title;
-
     @Ignore
     private List<Long> steps = null;
     @Ignore
@@ -37,15 +31,6 @@ public class Field {
     private Object values;
     @Ignore
     private Object blacklist;
-
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public long getServiceId() {
         return serviceId;

@@ -11,10 +11,18 @@ import com.andrey.dagger2project.App;
 import com.andrey.dagger2project.R;
 import com.andrey.dagger2project.adapter.ServiceCategoryAdapter;
 import com.andrey.dagger2project.api.ServiceCategoryApi;
+import com.andrey.dagger2project.database.repository.ServiceCategoryRepository;
+import com.andrey.dagger2project.di.component.DaggerRoomComponent;
 import com.andrey.dagger2project.di.component.ServiceCategoryComponent;
+import com.andrey.dagger2project.di.module.AppModule;
+import com.andrey.dagger2project.di.module.RoomModule;
 import com.andrey.dagger2project.model.ServiceCategory;
+import com.andrey.dagger2project.model.Subcategory;
 
 import java.util.List;
+
+
+import javax.inject.Inject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,6 +32,9 @@ public class ServiceCategoryActivity extends AppCompatActivity {
     private ServiceCategoryApi mServiceCategoryApi;
     private ServiceCategoryAdapter mAdapter;
     private List<ServiceCategory> mServiceCategoryList;
+
+    @Inject
+    private ServiceCategoryRepository repository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +47,13 @@ public class ServiceCategoryActivity extends AppCompatActivity {
         ServiceCategoryComponent component = app.getServiceCategoryComponent();
         mServiceCategoryApi = component.getServiceCategoryApi();
 
+        DaggerRoomComponent.builder()
+                .appModule(new AppModule(getApplication()))
+                .roomModule(new RoomModule(getApplication()))
+                .build()
+                .inject(this);
+
+
         loadAllCategories();
     }
 
@@ -47,13 +65,16 @@ public class ServiceCategoryActivity extends AppCompatActivity {
     }
 
     private void loadAllCategories() {
-        Call<List<ServiceCategory>> serviceCategoryCall = mServiceCategoryApi.getAll();
+        String expand = "children";
+        Call<List<ServiceCategory>> serviceCategoryCall = mServiceCategoryApi.getAll(expand);
         serviceCategoryCall.enqueue(new Callback<List<ServiceCategory>>() {
             @Override
             public void onResponse(@NonNull Call<List<ServiceCategory>> call, @NonNull Response<List<ServiceCategory>> response) {
                 mServiceCategoryList = response.body();
                 mAdapter.setItem(mServiceCategoryList);
                 mAdapter.notifyDataSetChanged();
+
+                repository.insertAll(mServiceCategoryList);
             }
 
             @Override

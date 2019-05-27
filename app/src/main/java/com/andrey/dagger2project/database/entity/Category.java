@@ -1,36 +1,22 @@
-package com.andrey.dagger2project.database.model;
+package com.andrey.dagger2project.database.entity;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.Ignore;
-import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.ForeignKey;
 
-@Entity(tableName = "service_categories")
-public class ServiceCategory {
-    @PrimaryKey
-    private long id;
-    @ColumnInfo(name = "parent_id")
+@Entity(tableName = "categories", foreignKeys = @ForeignKey(entity = Service.class, parentColumns = "id", childColumns = "serviceId"))
+public class Category extends BaseModel {
     private long parentId;
-    @ColumnInfo(name = "picture_url")
-    private String pictureUrl;
-
     private String title;
     private String name;
     private String picture;
-    private String language;
-
-    @Ignore
     private Object parent;
-    @Ignore
+    private Object children;
     private Object blacklist;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
+    private String language;
+    private String pictureUrl;
+    @ColumnInfo(index = true)
+    private long serviceId;
 
     public long getParentId() {
         return parentId;
@@ -72,6 +58,14 @@ public class ServiceCategory {
         this.parent = parent;
     }
 
+    public Object getChildren() {
+        return children;
+    }
+
+    public void setChildren(Object children) {
+        this.children = children;
+    }
+
     public Object getBlacklist() {
         return blacklist;
     }
@@ -96,4 +90,11 @@ public class ServiceCategory {
         this.pictureUrl = pictureUrl;
     }
 
+    public long getServiceId() {
+        return serviceId;
+    }
+
+    public void setServiceId(long serviceId) {
+        this.serviceId = serviceId;
+    }
 }

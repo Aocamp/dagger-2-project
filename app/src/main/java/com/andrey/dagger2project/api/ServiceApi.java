@@ -11,6 +11,6 @@ import retrofit2.http.Query;
 
 public interface ServiceApi {
     @Headers({"language: ru"})
-    @GET("service?")
-    Call<List<Service>> getBySubcategoryId(@Query("category_id") Long id);
+    @GET("service")
+    Call<List<Service>> getBySubcategoryId(@Query("category_id") Long id, @Query("expand") String children);
 }

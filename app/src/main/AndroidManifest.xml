@@ -2,9 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.andrey.dagger2project">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -17,6 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activity.SubserviceActivity"></activity>
         <activity android:name=".activity.ServiceCategoryActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +26,7 @@
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.SubcategoryActivity" />
         <activity android:name=".activity.ServiceActivity" />
-        <activity android:name=".activity.ServiceFieldActivity"></activity>
+        <activity android:name=".activity.ServiceFieldActivity" />
     </application>
 
 </manifest>

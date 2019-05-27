@@ -1,40 +1,20 @@
-package com.andrey.dagger2project.database.model;
+package com.andrey.dagger2project.database.entity;
 
-import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
-import android.arch.persistence.room.PrimaryKey;
 
-@Entity(tableName = "subcategories")
-public class Subcategory {
-    @PrimaryKey
-    private long id;
-    @ColumnInfo(name = "parent_id")
+@Entity(tableName = "service_categories")
+public class ServiceCategory extends BaseModel {
     private long parentId;
-    @ColumnInfo(name = "picture_url")
     private String pictureUrl;
-
     private String title;
     private String name;
+    private String picture;
     private String language;
-
-    @Ignore
-    private Object picture;
     @Ignore
     private Object parent;
     @Ignore
-    private Object children;
-    @Ignore
     private Object blacklist;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public long getParentId() {
         return parentId;
@@ -60,11 +40,11 @@ public class Subcategory {
         this.name = name;
     }
 
-    public Object getPicture() {
+    public String getPicture() {
         return picture;
     }
 
-    public void setPicture(Object picture) {
+    public void setPicture(String picture) {
         this.picture = picture;
     }
 
@@ -74,14 +54,6 @@ public class Subcategory {
 
     public void setParent(Object parent) {
         this.parent = parent;
-    }
-
-    public Object getChildren() {
-        return children;
-    }
-
-    public void setChildren(Object children) {
-        this.children = children;
     }
 
     public Object getBlacklist() {

@@ -1,27 +1,18 @@
-package com.andrey.dagger2project.database.model;
+package com.andrey.dagger2project.database.entity;
 
-import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
-import android.arch.persistence.room.PrimaryKey;
 
 import java.util.List;
 
 @Entity(tableName = "services")
-public class Service {
-    @PrimaryKey
-    private long id;
-    @ColumnInfo(name = "description_company")
+public class Service extends BaseModel {
     private String descriptionCompany;
-    @ColumnInfo(name = "commission_info")
     private String commissionInfo;
-    @ColumnInfo(name = "is_simple")
     private boolean isSimple;
-    @ColumnInfo(name = "updated_at")
     private String updatedAt;
-    @ColumnInfo(name = "picture_url")
     private String pictureUrl;
-
     private String name;
     private String title;
     private String description;
@@ -31,27 +22,14 @@ public class Service {
     private String template;
     private long priority;
     private boolean blacklist;
-
-    @ColumnInfo(name = "parent_id")
     @Ignore
     private Object parentId;
     @Ignore
     private List<String> synonyms = null;
     @Ignore
-    private Object categories;
-    @Ignore
     private Object children;
     @Ignore
     private Object parent;
-
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -163,14 +141,6 @@ public class Service {
 
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public Object getCategories() {
-        return categories;
-    }
-
-    public void setCategories(Object categories) {
-        this.categories = categories;
     }
 
     public Object getChildren() {

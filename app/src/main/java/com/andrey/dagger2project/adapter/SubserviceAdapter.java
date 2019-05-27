@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.andrey.dagger2project.R;
 import com.andrey.dagger2project.activity.ServiceFieldActivity;
 import com.andrey.dagger2project.activity.SubserviceActivity;
-import com.andrey.dagger2project.model.Service;
+import com.andrey.dagger2project.model.Subservice;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
@@ -25,52 +25,52 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceViewHolder>{
+public class SubserviceAdapter extends RecyclerView.Adapter<SubserviceAdapter.SubserviceViewHolder>{
     private final LayoutInflater mInflater;
-    private List<Service> mServiceList;
+    private List<Subservice> mSubserviceList;
     private Context mContext;
 
-    public ServiceAdapter(Context context, List<Service> mList) {
-        mServiceList = mList;
+    public SubserviceAdapter(Context context, List<Subservice> mList) {
+        mSubserviceList = mList;
         mInflater = LayoutInflater.from(context);
         mContext = context;
     }
 
     @NonNull
     @Override
-    public ServiceAdapter.ServiceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public SubserviceAdapter.SubserviceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = mInflater.inflate(R.layout.service_category, parent, false);
-        return new ServiceAdapter.ServiceViewHolder(itemView);
+        return new SubserviceAdapter.SubserviceViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ServiceAdapter.ServiceViewHolder holder, int position) {
-        Picasso.with(mContext).load(mServiceList.get(position).getPictureUrl()).into(holder.picture);
-        holder.title.setText(mServiceList.get(position).getTitle());
+    public void onBindViewHolder(@NonNull SubserviceAdapter.SubserviceViewHolder holder, int position) {
+        Picasso.with(mContext).load(mSubserviceList.get(position).getPictureUrl()).into(holder.picture);
+        holder.title.setText(mSubserviceList.get(position).getTitle());
     }
 
-    public void setItem(List<Service> messages){
-        mServiceList = messages;
+    public void setItem(List<Subservice> messages){
+        mSubserviceList = messages;
     }
 
     public void clearItem() {
-        mServiceList.clear();
+        mSubserviceList.clear();
     }
 
     @Override
     public int getItemCount() {
-        if (mServiceList != null)
-            return mServiceList.size();
+        if (mSubserviceList != null)
+            return mSubserviceList.size();
         else return 0;
     }
 
-    class ServiceViewHolder extends RecyclerView.ViewHolder{
+    class SubserviceViewHolder extends RecyclerView.ViewHolder{
         @BindView(R.id.picture)
         ImageView picture;
         @BindView(R.id.title)
         TextView title;
 
-        public ServiceViewHolder(View v){
+        public SubserviceViewHolder(View v){
             super(v);
 
             ButterKnife.bind(this, v);
@@ -80,17 +80,13 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
                 public void onClick(View view) {
                     RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) view.getTag();
                     int position = viewHolder.getAdapterPosition();
-                    Service service = mServiceList.get(position);
+                    Subservice service = mSubserviceList.get(position);
                     Gson gson = new Gson();
                     try {
                         JSONObject json = new JSONObject(gson.toJson(service));
-                        Intent intent = new Intent();
+                        Intent intent = new Intent(mContext, ServiceFieldActivity.class);
                         intent.putExtra("service", json.toString());
-                        if (!service.getChildren().isEmpty()){
-                            intent.setClass(mContext, SubserviceActivity.class);
-                        } else {
-                            intent.setClass(mContext, ServiceFieldActivity.class);
-                        }
+
                         mContext.startActivity(intent);
 
                     } catch (JSONException e) {

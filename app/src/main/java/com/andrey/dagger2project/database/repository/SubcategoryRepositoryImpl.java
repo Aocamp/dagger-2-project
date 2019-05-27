@@ -3,7 +3,7 @@ package com.andrey.dagger2project.database.repository;
 import android.arch.lifecycle.LiveData;
 
 import com.andrey.dagger2project.database.dao.SubcategoryDao;
-import com.andrey.dagger2project.database.model.Subcategory;
+import com.andrey.dagger2project.database.entity.Subcategory;
 
 import java.util.List;
 
@@ -18,13 +18,13 @@ public class SubcategoryRepositoryImpl implements SubcategoryRepository {
     }
 
     @Override
-    public void insert(Subcategory serviceCategory) {
-        dao.insert(serviceCategory);
+    public void insert(Subcategory subcategory) {
+        dao.insert(subcategory);
     }
 
     @Override
-    public void insertAll(Subcategory... serviceCategories) {
-        dao.insertAll();
+    public void insertAll(List<Subcategory> t) {
+        dao.insertAll(t);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class SubcategoryRepositoryImpl implements SubcategoryRepository {
     }
 
     @Override
-    public LiveData<List<Subcategory>> getAllById(Long id) {
-        return dao.getAllById(id);
+    public LiveData<List<Subcategory>> getAllByCategoryId(Long id) {
+        return dao.getAllByCategoryId(id);
     }
 }

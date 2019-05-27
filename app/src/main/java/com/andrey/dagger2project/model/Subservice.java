@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Service {
+public class Subservice {
     @SerializedName("id")
     @Expose
     private long id;
@@ -14,7 +14,7 @@ public class Service {
     private String name;
     @SerializedName("parent_id")
     @Expose
-    private Object parentId;
+    private long parentId;
     @SerializedName("title")
     @Expose
     private String title;
@@ -41,7 +41,7 @@ public class Service {
     private long status;
     @SerializedName("template")
     @Expose
-    private String template;
+    private Object template;
     @SerializedName("is_simple")
     @Expose
     private boolean isSimple;
@@ -56,10 +56,10 @@ public class Service {
     private List<Field> fields = null;
     @SerializedName("categories")
     @Expose
-    private List<Category> categories = null;
+    private Object categories;
     @SerializedName("children")
     @Expose
-    private List<Subservice> children = null;
+    private Object children;
     @SerializedName("parent")
     @Expose
     private Object parent;
@@ -86,11 +86,11 @@ public class Service {
         this.name = name;
     }
 
-    public Object getParentId() {
+    public long getParentId() {
         return parentId;
     }
 
-    public void setParentId(Object parentId) {
+    public void setParentId(long parentId) {
         this.parentId = parentId;
     }
 
@@ -158,11 +158,11 @@ public class Service {
         this.status = status;
     }
 
-    public String getTemplate() {
+    public Object getTemplate() {
         return template;
     }
 
-    public void setTemplate(String template) {
+    public void setTemplate(Object template) {
         this.template = template;
     }
 
@@ -198,19 +198,19 @@ public class Service {
         this.fields = fields;
     }
 
-    public List<Category> getCategories() {
+    public Object getCategories() {
         return categories;
     }
 
-    public void setCategories(List<Category> categories) {
+    public void setCategories(Object categories) {
         this.categories = categories;
     }
 
-    public List<Subservice> getChildren() {
+    public Object getChildren() {
         return children;
     }
 
-    public void setChildren(List<Subservice> children) {
+    public void setChildren(Object children) {
         this.children = children;
     }
 
