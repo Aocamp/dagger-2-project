@@ -56,7 +56,7 @@ public class Service {
     private List<Field> fields = null;
     @SerializedName("categories")
     @Expose
-    private Object categories;
+    private List<Category> categories = null;
     @SerializedName("children")
     @Expose
     private Object children;
@@ -198,11 +198,11 @@ public class Service {
         this.fields = fields;
     }
 
-    public Object getCategories() {
+    public List<Category> getCategories() {
         return categories;
     }
 
-    public void setCategories(Object categories) {
+    public void setCategories(List<Category> categories) {
         this.categories = categories;
     }
 

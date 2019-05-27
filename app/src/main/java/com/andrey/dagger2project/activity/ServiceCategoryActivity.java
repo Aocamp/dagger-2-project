@@ -22,7 +22,6 @@ import retrofit2.Response;
 
 public class ServiceCategoryActivity extends AppCompatActivity {
     private ServiceCategoryApi mServiceCategoryApi;
-    private RecyclerView mRecyclerView;
     private ServiceCategoryAdapter mAdapter;
     private List<ServiceCategory> mServiceCategoryList;
 
@@ -41,7 +40,7 @@ public class ServiceCategoryActivity extends AppCompatActivity {
     }
 
     private void initRecyclerView(){
-        mRecyclerView = findViewById(R.id.recycler_view_service_category);
+        RecyclerView mRecyclerView = findViewById(R.id.recycler_view_service_category);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new ServiceCategoryAdapter(ServiceCategoryActivity.this, mServiceCategoryList);
         mRecyclerView.setAdapter(mAdapter);

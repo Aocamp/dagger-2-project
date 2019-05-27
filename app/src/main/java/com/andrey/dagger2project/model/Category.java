@@ -1,32 +1,39 @@
-package com.andrey.dagger2project.database.model;
+package com.andrey.dagger2project.model;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.ForeignKey;
-import android.arch.persistence.room.Ignore;
-import android.arch.persistence.room.PrimaryKey;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-@Entity(tableName = "subcategories")
-public class Subcategory {
-    @PrimaryKey
+public class Category {
+    @SerializedName("id")
+    @Expose
     private long id;
-    @ColumnInfo(name = "parent_id")
+    @SerializedName("parent_id")
+    @Expose
     private long parentId;
-    @ColumnInfo(name = "picture_url")
-    private String pictureUrl;
-
+    @SerializedName("title")
+    @Expose
     private String title;
+    @SerializedName("name")
+    @Expose
     private String name;
-    private String language;
-
-    @Ignore
-    private Object picture;
-    @Ignore
+    @SerializedName("picture")
+    @Expose
+    private String picture;
+    @SerializedName("parent")
+    @Expose
     private Object parent;
-    @Ignore
+    @SerializedName("children")
+    @Expose
     private Object children;
-    @Ignore
+    @SerializedName("blacklist")
+    @Expose
     private Object blacklist;
+    @SerializedName("language")
+    @Expose
+    private String language;
+    @SerializedName("picture_url")
+    @Expose
+    private String pictureUrl;
 
     public long getId() {
         return id;
@@ -60,11 +67,11 @@ public class Subcategory {
         this.name = name;
     }
 
-    public Object getPicture() {
+    public String getPicture() {
         return picture;
     }
 
-    public void setPicture(Object picture) {
+    public void setPicture(String picture) {
         this.picture = picture;
     }
 
@@ -107,4 +114,5 @@ public class Subcategory {
     public void setPictureUrl(String pictureUrl) {
         this.pictureUrl = pictureUrl;
     }
+
 }

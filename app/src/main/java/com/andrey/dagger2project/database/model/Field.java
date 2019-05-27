@@ -8,11 +8,7 @@ import android.arch.persistence.room.PrimaryKey;
 
 import java.util.List;
 
-@Entity(tableName = "fields",
-        foreignKeys = @ForeignKey(
-                entity = Service.class,
-                parentColumns = "id",
-                childColumns = "service_id"))
+@Entity(tableName = "fields")
 public class Field {
     @PrimaryKey
     private long id;

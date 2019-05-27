@@ -22,19 +22,4 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract ServiceCategoryDao getServiceCategoryDao();
     public abstract ServiceDao getServiceDao();
     public abstract SubcategoryDao getSubcategoryDao();
-
-    private static volatile AppDatabase INSTANCE;
-
-    static AppDatabase getDatabase(final Context context) {
-        if (INSTANCE == null) {
-            synchronized (AppDatabase.class) {
-                if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            AppDatabase.class, "mydb")
-                            .build();
-                }
-            }
-        }
-        return INSTANCE;
-    }
 }
