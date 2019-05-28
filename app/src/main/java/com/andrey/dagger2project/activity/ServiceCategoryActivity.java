@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.andrey.dagger2project.App;
@@ -14,7 +15,6 @@ import com.andrey.dagger2project.api.ServiceCategoryApi;
 import com.andrey.dagger2project.database.model.Subcategory;
 import com.andrey.dagger2project.database.repository.ServiceCategoryRepository;
 import com.andrey.dagger2project.database.repository.SubcategoryRepository;
-import com.andrey.dagger2project.di.component.DaggerRoomComponent;
 import com.andrey.dagger2project.di.component.ServiceCategoryComponent;
 import com.andrey.dagger2project.di.module.AppModule;
 import com.andrey.dagger2project.di.module.RoomModule;
@@ -51,14 +51,15 @@ public class ServiceCategoryActivity extends AppCompatActivity {
         ServiceCategoryComponent component = app.getServiceCategoryComponent();
         mServiceCategoryApi = component.getServiceCategoryApi();
 
-        DaggerRoomComponent.builder()
-                .appModule(new AppModule(getApplication()))
-                .roomModule(new RoomModule(getApplication()))
-                .build()
-                .inject(this);
+//        DaggerRoomComponent.builder()
+//                .appModule(new AppModule(getApplication()))
+//                .roomModule(new RoomModule(getApplication()))
+//                .build()
+//                .inject(this);
 
 
         loadAllCategories();
+
     }
 
     private void initRecyclerView(){
@@ -68,6 +69,8 @@ public class ServiceCategoryActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(mAdapter);
     }
 
+
+
     private void loadAllCategories() {
         String expand = "children";
         Call<List<ServiceCategory>> serviceCategoryCall = mServiceCategoryApi.getAll(expand);
@@ -75,13 +78,18 @@ public class ServiceCategoryActivity extends AppCompatActivity {
             @Override
             public void onResponse(@NonNull Call<List<ServiceCategory>> call, @NonNull Response<List<ServiceCategory>> response) {
                 mServiceCategoryList = response.body();
+                repository.insertAll(mServiceCategoryList);
                 mAdapter.setItem(mServiceCategoryList);
                 mAdapter.notifyDataSetChanged();
-                repository.insertAll(mServiceCategoryList);
 
-                for (ServiceCategory service: mServiceCategoryList){
-                    mSubcategoryList.add((Subcategory) service.getChildren());
-                }
+
+
+
+//                for (ServiceCategory service: mServiceCategoryList){
+//                    mSubcategoryList.addAll(service.getChildren());
+//                }
+
+
             }
 
             @Override

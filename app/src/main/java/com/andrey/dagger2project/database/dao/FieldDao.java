@@ -8,14 +8,16 @@ import com.andrey.dagger2project.database.model.Field;
 
 import java.util.List;
 
+import io.reactivex.Maybe;
+
 @Dao
 public interface FieldDao extends BaseDao <Field>{
     @Query("DELETE FROM Field")
     void deleteAll();
 
     @Query("SELECT * from Field")
-    LiveData<List<Field>> getAll();
+    Maybe<List<Field>> getAll();
 
     @Query("SELECT * FROM Field WHERE serviceId = :id ")
-    Field getByServiceId(Long id);
+    Maybe<Field> getByServiceId(Long id);
 }

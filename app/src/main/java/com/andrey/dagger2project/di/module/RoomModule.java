@@ -7,9 +7,7 @@ import com.andrey.dagger2project.database.AppDatabase;
 import com.andrey.dagger2project.database.dao.ServiceCategoryDao;
 import com.andrey.dagger2project.database.dao.SubcategoryDao;
 import com.andrey.dagger2project.database.repository.ServiceCategoryRepository;
-import com.andrey.dagger2project.database.repository.ServiceCategoryRepositoryImpl;
 import com.andrey.dagger2project.database.repository.SubcategoryRepository;
-import com.andrey.dagger2project.database.repository.SubcategoryRepositoryImpl;
 import com.andrey.dagger2project.di.annotation.ApplicationScope;
 
 import dagger.Module;
@@ -44,12 +42,12 @@ public class RoomModule {
     @ApplicationScope
     @Provides
     ServiceCategoryRepository serviceCategoryRepository(ServiceCategoryDao dao) {
-        return new ServiceCategoryRepositoryImpl(dao);
+        return new ServiceCategoryRepository(dao);
     }
 
     @ApplicationScope
     @Provides
     SubcategoryRepository subcategoryRepository(SubcategoryDao dao) {
-        return new SubcategoryRepositoryImpl(dao);
+        return new SubcategoryRepository(dao);
     }
 }

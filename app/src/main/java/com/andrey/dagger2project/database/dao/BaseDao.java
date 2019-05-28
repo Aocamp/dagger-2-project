@@ -8,12 +8,14 @@ import com.andrey.dagger2project.database.model.BaseModel;
 
 import java.util.List;
 
+import io.reactivex.Completable;
+
 public interface BaseDao <T extends BaseModel> {
     @Insert
-    void insert (T t);
+    Completable insert (T t);
 
     @Insert
-    void insertAll (List<T> t);
+    Completable insertAll (List<T> t);
 
     @Update
     void update (T t);
