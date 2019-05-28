@@ -63,7 +63,7 @@ public class SubcategoryActivity extends AppCompatActivity {
 //        mServiceList = category.getChildren();
 
         Long id = intent.getLongExtra("id", 0);
-
+        subcategoryRepository.getAllByCategoryId(id);
 
         mAdapter.setItem(mServiceList);
         mAdapter.notifyDataSetChanged();

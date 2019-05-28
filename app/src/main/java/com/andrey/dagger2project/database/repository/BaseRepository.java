@@ -1,18 +1,46 @@
 package com.andrey.dagger2project.database.repository;
 
+import android.arch.lifecycle.LiveData;
+import android.os.AsyncTask;
+
+import com.andrey.dagger2project.database.AppDatabase;
+import com.andrey.dagger2project.database.dao.BaseDao;
 import com.andrey.dagger2project.database.model.BaseModel;
 
 import java.util.List;
 
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
+public abstract class BaseRepository<T extends BaseModel> {
+    private BaseDao dao;
 
-public interface BaseRepository <T extends BaseModel> {
-    Completable insert (T t);
+    public void insert (T t){
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                dao.insert(t);
+                return null;
+            }
+        }.execute();
+    }
 
-    Completable insertAll (List<T> t);
+    public void insertAll (List<T> t){
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                dao.insertAll(t);
+                return null;
+            }
+        }.execute();
+    }
 
-    void deleteAll();
+    public void deleteAll(T t) {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                dao.delete(t);
+                return null;
+            }
+        }.execute();
+    }
 
-    Maybe<List<T>> getAll();
+
 }

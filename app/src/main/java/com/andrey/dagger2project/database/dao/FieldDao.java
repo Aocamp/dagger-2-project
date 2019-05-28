@@ -16,8 +16,8 @@ public interface FieldDao extends BaseDao <Field>{
     void deleteAll();
 
     @Query("SELECT * from Field")
-    Maybe<List<Field>> getAll();
+    List<Field> getAll();
 
     @Query("SELECT * FROM Field WHERE serviceId = :id ")
-    Maybe<Field> getByServiceId(Long id);
+    Field getByServiceId(Long id);
 }

@@ -17,7 +17,7 @@ public interface ServiceDao extends BaseDao<Service>{
     void deleteAll();
 
     @Query("SELECT * FROM Service")
-    Maybe<List<Service>> getAll();
+    List<Service> getAll();
 //
 //    @Query("SELECT * FROM services WHERE categories = :id ")
 //    Flowable<List<Service>> getAllBySubcategoryId(Long id);

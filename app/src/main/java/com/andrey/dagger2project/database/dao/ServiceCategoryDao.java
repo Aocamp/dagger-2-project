@@ -16,5 +16,5 @@ public interface ServiceCategoryDao extends BaseDao<ServiceCategory>{
     void deleteAll();
 
     @Query("SELECT * FROM ServiceCategory")
-    Maybe<List<ServiceCategory>> getAll();
+    List<ServiceCategory> getAll();
 }

@@ -22,9 +22,12 @@ import com.andrey.dagger2project.di.module.RoomModule;
 import com.andrey.dagger2project.database.model.ServiceCategory;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import javax.inject.Inject;
 
+import io.reactivex.Completable;
+import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -83,14 +86,9 @@ public class ServiceCategoryActivity extends AppCompatActivity {
                 mAdapter.setItem(mServiceCategoryList);
                 mAdapter.notifyDataSetChanged();
 
-
-
-
 //                for (ServiceCategory service: mServiceCategoryList){
 //                    mSubcategoryList.addAll(service.getChildren());
 //                }
-
-
             }
 
             @Override

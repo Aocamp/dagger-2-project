@@ -1,6 +1,6 @@
 package com.andrey.dagger2project.database.repository;
 
-import android.arch.lifecycle.LiveData;
+import android.os.AsyncTask;
 
 import com.andrey.dagger2project.database.dao.SubcategoryDao;
 import com.andrey.dagger2project.database.model.Subcategory;
@@ -9,10 +9,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.Flowable;
-import io.reactivex.Maybe;
-
-public class SubcategoryRepository implements BaseRepository<Subcategory> {
+public class SubcategoryRepository extends BaseRepository<Subcategory> {
     private SubcategoryDao dao;
 
     @Inject
@@ -20,27 +17,34 @@ public class SubcategoryRepository implements BaseRepository<Subcategory> {
         this.dao = dao;
     }
 
-    @Override
-    public void insert(Subcategory subcategory) {
-        dao.insert(subcategory);
-    }
 
-    @Override
-    public void insertAll(List<Subcategory> t) {
-        dao.insertAll(t);
-    }
-
-    @Override
-    public void deleteAll() {
-        dao.deleteAll();
-    }
-
-    @Override
-    public Maybe<List<Subcategory>> getAll() {
+    public List<Subcategory> getAll() {
         return dao.getAll();
     }
 
-    public Maybe<List<Subcategory>> getAllByCategoryId(Long id) {
-        return dao.getAllByCategoryId(id);
+    public List<Subcategory> getAllByCategoryId(Long id) {
+        return new GetByIdTask(id).dao.getAllByCategoryId(id);
+    }
+
+    public static class GetByIdTask extends AsyncTask<Void, Void, Void>
+    {
+        private SubcategoryDao dao;
+        private Long id;
+
+        public GetByIdTask(Long id){
+            this.id = id;
+        }
+
+        @Override
+        protected Void doInBackground(Void... v) {
+            dao.getAllByCategoryId(id);
+            return null;
+        }
+
+        protected void onPostExecute(Void response)
+        {
+
+        }
+
     }
 }

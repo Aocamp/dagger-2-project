@@ -16,8 +16,8 @@ public interface SubcategoryDao extends BaseDao<Subcategory> {
     void deleteAll();
 
     @Query("SELECT * FROM Subcategory")
-    Maybe<List<Subcategory>> getAll();
+    List<Subcategory> getAll();
 
     @Query("SELECT * FROM Subcategory WHERE parentId = :id ")
-    Maybe<List<Subcategory>> getAllByCategoryId(Long id);
+    List<Subcategory> getAllByCategoryId(Long id);
 }
