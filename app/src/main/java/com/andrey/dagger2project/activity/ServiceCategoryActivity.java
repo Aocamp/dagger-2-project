@@ -15,6 +15,7 @@ import com.andrey.dagger2project.api.ServiceCategoryApi;
 import com.andrey.dagger2project.database.model.Subcategory;
 import com.andrey.dagger2project.database.repository.ServiceCategoryRepository;
 import com.andrey.dagger2project.database.repository.SubcategoryRepository;
+import com.andrey.dagger2project.di.component.DaggerRoomComponent;
 import com.andrey.dagger2project.di.component.ServiceCategoryComponent;
 import com.andrey.dagger2project.di.module.AppModule;
 import com.andrey.dagger2project.di.module.RoomModule;
@@ -51,11 +52,11 @@ public class ServiceCategoryActivity extends AppCompatActivity {
         ServiceCategoryComponent component = app.getServiceCategoryComponent();
         mServiceCategoryApi = component.getServiceCategoryApi();
 
-//        DaggerRoomComponent.builder()
-//                .appModule(new AppModule(getApplication()))
-//                .roomModule(new RoomModule(getApplication()))
-//                .build()
-//                .inject(this);
+        DaggerRoomComponent.builder()
+                .appModule(new AppModule(getApplication()))
+                .roomModule(new RoomModule(getApplication()))
+                .build()
+                .inject(this);
 
 
         loadAllCategories();
