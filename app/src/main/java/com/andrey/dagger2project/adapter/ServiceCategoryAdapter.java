@@ -74,23 +74,13 @@ public class ServiceCategoryAdapter extends RecyclerView.Adapter<ServiceCategory
 
             ButterKnife.bind(this, v);
             v.setTag(this);
-            View.OnClickListener mOnItemClickListener = new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) view.getTag();
-                    int position = viewHolder.getAdapterPosition();
-                    ServiceCategory serviceCategory = mServiceCategoryList.get(position);
-                    Intent intent = new Intent(mContext, SubcategoryActivity.class);
-                    Gson gson = new Gson();
-                    try {
-                        JSONObject json = new JSONObject(gson.toJson(serviceCategory));
-                        intent.putExtra("subcategories", json.toString());
-                        intent.putExtra("id", serviceCategory.getId());
-                        mContext.startActivity(intent);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
+            View.OnClickListener mOnItemClickListener = view -> {
+                RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) view.getTag();
+                int position = viewHolder.getAdapterPosition();
+                ServiceCategory serviceCategory = mServiceCategoryList.get(position);
+                Intent intent = new Intent(mContext, SubcategoryActivity.class);
+                intent.putExtra("id", serviceCategory.getId());
+                mContext.startActivity(intent);
             };
             v.setOnClickListener(mOnItemClickListener);
         }

@@ -70,16 +70,13 @@ public class SubcategoryAdapter extends RecyclerView.Adapter<SubcategoryAdapter.
 
             ButterKnife.bind(this, v);
             v.setTag(this);
-            View.OnClickListener mOnItemClickListener = new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) view.getTag();
-                    int position = viewHolder.getAdapterPosition();
-                    Long id = mServiceCategoryList.get(position).getId();
-                    Intent intent = new Intent(mContext, ServiceActivity.class);
-                    intent.putExtra("id", id);
-                    mContext.startActivity(intent);
-                }
+            View.OnClickListener mOnItemClickListener = view -> {
+                RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) view.getTag();
+                int position = viewHolder.getAdapterPosition();
+                Long id = mServiceCategoryList.get(position).getId();
+                Intent intent = new Intent(mContext, ServiceActivity.class);
+                intent.putExtra("id", id);
+                mContext.startActivity(intent);
             };
             v.setOnClickListener(mOnItemClickListener);
         }

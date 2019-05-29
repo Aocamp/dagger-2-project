@@ -1,5 +1,6 @@
 package com.andrey.dagger2project.database.model;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
@@ -11,6 +12,7 @@ import com.google.gson.annotations.SerializedName;
 public class Subcategory extends BaseModel {
     @SerializedName("parent_id")
     @Expose
+    @ColumnInfo(index = true)
     private long parentId;
     @SerializedName("title")
     @Expose

@@ -1,5 +1,7 @@
 package com.andrey.dagger2project.database.repository;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.persistence.room.Dao;
 import android.os.AsyncTask;
 
 import com.andrey.dagger2project.database.dao.SubcategoryDao;
@@ -9,42 +11,21 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class SubcategoryRepository extends BaseRepository<Subcategory> {
-    private SubcategoryDao dao;
-
+public class SubcategoryRepository extends BaseRepository<Subcategory, SubcategoryDao> {
     @Inject
-    public SubcategoryRepository(SubcategoryDao dao){
-        this.dao = dao;
+    public SubcategoryRepository(SubcategoryDao dao) {
+        super(dao);
     }
 
-
-    public List<Subcategory> getAll() {
-        return dao.getAll();
+    public LiveData<List<Subcategory>> getAll() {
+        return getDao().getAll();
     }
 
-    public List<Subcategory> getAllByCategoryId(Long id) {
-        return new GetByIdTask(id).dao.getAllByCategoryId(id);
-    }
+//    public LiveData<List<Subcategory>> getAllByCategoryId(Long id) {
+//        return getDao().getAllByCategoryId(id);
+//    }
 
-    public static class GetByIdTask extends AsyncTask<Void, Void, Void>
-    {
-        private SubcategoryDao dao;
-        private Long id;
-
-        public GetByIdTask(Long id){
-            this.id = id;
-        }
-
-        @Override
-        protected Void doInBackground(Void... v) {
-            dao.getAllByCategoryId(id);
-            return null;
-        }
-
-        protected void onPostExecute(Void response)
-        {
-
-        }
-
+    public LiveData<Subcategory> getByCategoryId(Long id) {
+        return getDao().getByCategoryId(id);
     }
 }

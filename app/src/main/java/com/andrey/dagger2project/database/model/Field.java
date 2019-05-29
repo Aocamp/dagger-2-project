@@ -1,5 +1,6 @@
 package com.andrey.dagger2project.database.model;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
@@ -15,6 +16,7 @@ import java.util.List;
 public class Field extends BaseModel {
     @SerializedName("service_id")
     @Expose
+    @ColumnInfo(index = true)
     private long serviceId;
     @SerializedName("name")
     @Expose

@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.andrey.dagger2project.R;
 import com.andrey.dagger2project.activity.ServiceFieldActivity;
-import com.andrey.dagger2project.activity.SubserviceActivity;
+import com.andrey.dagger2project.activity.SubServiceActivity;
 import com.andrey.dagger2project.database.model.Service;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
@@ -87,7 +87,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
                         Intent intent = new Intent();
                         intent.putExtra("service", json.toString());
                         if (!service.getChildren().isEmpty()){
-                            intent.setClass(mContext, SubserviceActivity.class);
+                            intent.setClass(mContext, SubServiceActivity.class);
                         } else {
                             intent.setClass(mContext, ServiceFieldActivity.class);
                         }

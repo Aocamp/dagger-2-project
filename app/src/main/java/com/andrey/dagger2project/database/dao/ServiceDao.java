@@ -8,8 +8,6 @@ import com.andrey.dagger2project.database.model.Service;
 
 import java.util.List;
 
-import io.reactivex.Flowable;
-import io.reactivex.Maybe;
 
 @Dao
 public interface ServiceDao extends BaseDao<Service>{
@@ -17,10 +15,10 @@ public interface ServiceDao extends BaseDao<Service>{
     void deleteAll();
 
     @Query("SELECT * FROM Service")
-    List<Service> getAll();
-//
-//    @Query("SELECT * FROM services WHERE categories = :id ")
-//    Flowable<List<Service>> getAllBySubcategoryId(Long id);
+    LiveData<List<Service>> getAll();
+
+//    @Query("SELECT * FROM Service WHERE  = :id ")
+//    LiveData<List<Service>> getAllBySubcategoryId(Long id);
 }
 
 

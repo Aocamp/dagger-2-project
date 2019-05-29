@@ -5,8 +5,12 @@ import android.arch.persistence.room.Room;
 
 import com.andrey.dagger2project.database.AppDatabase;
 import com.andrey.dagger2project.database.dao.ServiceCategoryDao;
+import com.andrey.dagger2project.database.dao.ServiceDao;
+import com.andrey.dagger2project.database.dao.SubcategoryByCategoryDao;
 import com.andrey.dagger2project.database.dao.SubcategoryDao;
 import com.andrey.dagger2project.database.repository.ServiceCategoryRepository;
+import com.andrey.dagger2project.database.repository.ServiceRepository;
+import com.andrey.dagger2project.database.repository.SubcategoryByCategoryRepository;
 import com.andrey.dagger2project.database.repository.SubcategoryRepository;
 import com.andrey.dagger2project.di.annotation.ApplicationScope;
 
@@ -41,8 +45,32 @@ public class RoomModule {
 
     @ApplicationScope
     @Provides
+    ServiceDao providesServiceDao(AppDatabase database) {
+        return database.getServiceDao();
+    }
+
+    @ApplicationScope
+    @Provides
+    SubcategoryByCategoryDao subcategoryByCategoryDao(AppDatabase database) {
+        return database.getSubcategoryByCategoryDao();
+    }
+
+    @ApplicationScope
+    @Provides
     ServiceCategoryRepository serviceCategoryRepository(ServiceCategoryDao dao) {
         return new ServiceCategoryRepository(dao);
+    }
+
+    @ApplicationScope
+    @Provides
+    SubcategoryByCategoryRepository subcategoryByCategoryRepository(SubcategoryByCategoryDao dao) {
+        return new SubcategoryByCategoryRepository(dao);
+    }
+
+    @ApplicationScope
+    @Provides
+    ServiceRepository serviceRepository(ServiceDao dao) {
+        return new ServiceRepository(dao);
     }
 
     @ApplicationScope

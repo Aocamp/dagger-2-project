@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
 public class BaseModel {
     @SerializedName("id")
     @Expose
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private long id;
 
     public long getId() {

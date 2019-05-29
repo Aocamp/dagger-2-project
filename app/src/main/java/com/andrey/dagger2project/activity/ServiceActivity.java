@@ -12,9 +12,14 @@ import com.andrey.dagger2project.App;
 import com.andrey.dagger2project.R;
 import com.andrey.dagger2project.adapter.ServiceAdapter;
 import com.andrey.dagger2project.api.ServiceApi;
+import com.andrey.dagger2project.database.model.SubService;
+import com.andrey.dagger2project.database.repository.ServiceRepository;
+import com.andrey.dagger2project.database.repository.SubServiceRepository;
+import com.andrey.dagger2project.di.component.RoomComponent;
 import com.andrey.dagger2project.di.component.ServiceCategoryComponent;
 import com.andrey.dagger2project.database.model.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -26,11 +31,16 @@ public class ServiceActivity extends AppCompatActivity {
     private ServiceAdapter mAdapter;
     private List<Service> mServiceList;
     private ServiceApi mServiceApi;
+    private RoomComponent roomComponent;
+    private ServiceRepository serviceRepository;
+    private SubServiceRepository subServiceRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service);
+
+        mServiceList = new ArrayList<>();
 
         initRecyclerView();
 
@@ -38,7 +48,19 @@ public class ServiceActivity extends AppCompatActivity {
         ServiceCategoryComponent component = app.getServiceCategoryComponent();
         mServiceApi = component.getServiceApi();
 
-        loadAllMessages();
+        RoomComponent roomComponent = app.getRoomComponent();
+        roomComponent.inject(this);
+
+        serviceRepository.getAllByCategoryId().observe(this, mServiceList -> {
+            if (mServiceList != null){
+                mAdapter.setItem(mServiceList);
+                mAdapter.notifyDataSetChanged();
+            }
+        });
+
+        if (mServiceList.isEmpty()){
+            loadAllMessages();
+        }
     }
 
     private void initRecyclerView(){
@@ -57,6 +79,12 @@ public class ServiceActivity extends AppCompatActivity {
             @Override
             public void onResponse(@NonNull Call<List<Service>> call, @NonNull Response<List<Service>> response) {
                 mServiceList = response.body();
+                serviceRepository.insertAll(mServiceList);
+                List<SubService> subServices = new ArrayList<>();
+                for (Service service: mServiceList){
+                        subServices.addAll(service.getChildren());
+                }
+
                 mAdapter.setItem(mServiceList);
                 mAdapter.notifyDataSetChanged();
             }

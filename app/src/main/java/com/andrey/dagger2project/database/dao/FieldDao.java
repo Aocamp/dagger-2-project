@@ -16,8 +16,8 @@ public interface FieldDao extends BaseDao <Field>{
     void deleteAll();
 
     @Query("SELECT * from Field")
-    List<Field> getAll();
+    LiveData<List<Field>> getAll();
 
     @Query("SELECT * FROM Field WHERE serviceId = :id ")
-    Field getByServiceId(Long id);
+    LiveData<Field> getByServiceId(Long id);
 }

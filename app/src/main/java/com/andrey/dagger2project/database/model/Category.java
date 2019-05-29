@@ -1,5 +1,6 @@
 package com.andrey.dagger2project.database.model;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
@@ -39,6 +40,7 @@ public class Category extends BaseModel{
     @SerializedName("picture_url")
     @Expose
     private String pictureUrl;
+    @ColumnInfo(index = true)
     private long serviceId;
 
     public long getParentId() {

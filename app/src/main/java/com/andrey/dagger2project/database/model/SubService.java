@@ -1,5 +1,6 @@
 package com.andrey.dagger2project.database.model;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
@@ -16,6 +17,7 @@ public class SubService extends BaseModel {
     private String name;
     @SerializedName("parent_id")
     @Expose
+    @ColumnInfo(index = true)
     private long parentId;
     @SerializedName("title")
     @Expose

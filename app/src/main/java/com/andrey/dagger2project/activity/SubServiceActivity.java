@@ -14,7 +14,7 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
-public class SubserviceActivity extends AppCompatActivity {
+public class SubServiceActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private SubserviceAdapter mAdapter;
     private List<SubService> mSubServiceList;
@@ -32,7 +32,7 @@ public class SubserviceActivity extends AppCompatActivity {
     private void initRecyclerView(){
         mRecyclerView = findViewById(R.id.recycler_view_subservice);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new SubserviceAdapter(SubserviceActivity.this, mSubServiceList);
+        mAdapter = new SubserviceAdapter(SubServiceActivity.this, mSubServiceList);
         mRecyclerView.setAdapter(mAdapter);
     }
 
